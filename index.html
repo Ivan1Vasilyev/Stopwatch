@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./page/index.css">
+  <title>Stopwatch</title>
+</head>
+
+<body class="page">
+  <div class="container">
+    <p class="main-timer">
+      <span class="hours">00</span> : <span class="minutes">00</span> : <span class="seconds">00</span> : <span
+        class="miliseconds">00</span>
+    </p>
+    <div class="button-container">
+      <button class="start">Начать</button>
+      <button class="pause">Остановить</button>
+      <button class="stop">Сбросить</button>
+      <button class="interval-button" disabled>Интервал</button>
+    </div>
+
+  </div>
+  <div class="container-interval"></div>
+  <template id="interval-template">
+    <div class="interval">
+      <p class="interval__text"></p>
+      <button class="interval__button-clear">Удалить</button>
+    </div>
+  </template>
+  <script src="./scripts/index.js"></script>
+</body>
+
+</html>
