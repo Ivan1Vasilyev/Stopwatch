@@ -7,8 +7,7 @@ const mainTimer = document.querySelector('.main-timer'),
   intervalTemplate = document.getElementById('interval-template').content.querySelector('.interval');
 
 function isZeroNeed(num) {
-  num = String(num);
-  return num.length == 1 ? '0' + num : num;
+  return String(num).length == 1 ? '0' + num : num;
 }
 
 class Timer {
@@ -31,6 +30,14 @@ class Timer {
       this.reset();
     }
     this.updateText();
+    // if (this === centiseconds) {
+    //   if (this.current % 5 === 0) {
+    //     this.updateText();
+    //   }
+    // } else {
+    //   this.updateText();
+    // }
+    // this === centiseconds ? (this.current % 5 === 0 ? this.updateText() : false) : this.updateText();
   }
 }
 
@@ -51,6 +58,7 @@ const playTimer = () => {
 
 const pauseTimer = () => {
   buttonInterval.setAttribute('disabled', true);
+  centiseconds.updateText();
   clearInterval(timerId);
 };
 
@@ -61,13 +69,14 @@ const resetTimer = () => {
     item.reset();
     item.updateText();
   });
+  countIntervals = 1;
 };
 
 const createInterval = () => {
   const newInterval = intervalTemplate.cloneNode(true);
   const text = newInterval.querySelector('.interval__text');
   const button = newInterval.querySelector('.interval__button-clear');
-  text.textContent = `${countIntervals++}. ${isZeroNeed(hours.current)}:${isZeroNeed(minutes.current)}:${isZeroNeed(seconds.current)}:${isZeroNeed(centiseconds.current)}`;
+  text.textContent = `${countIntervals++}) ${isZeroNeed(hours.current)}:${isZeroNeed(minutes.current)}:${isZeroNeed(seconds.current)}:${isZeroNeed(centiseconds.current)}`;
   button.addEventListener('click', () => newInterval.remove());
   return newInterval;
 };

@@ -3,10 +3,52 @@
   justify-content: center;
 }
 
+.main-timer {
+  font-size: 64px;
+  margin: 0;
+}
+.timer {
+  padding: 8px;
+  border: 1px solid #000;
+  border-radius: 5px;
+  display: inline-block;
+  width: 65px;
+}
+
 .container {
-  width: 250px;
+  /* width: 250px; */
+  display: flex;
+  align-items: flex-start;
+}
+
+.button-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 20px;
+}
+
+.button {
+  margin: 2px;
 }
 
 .container-interval {
   width: 350px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.interval {
+  display: flex;
+  /* flex-direction: column; */
+  align-items: center;
+}
+
+.interval__text {
+  margin: 0;
+}
+
+.interval__button-clear {
+  margin-left: 5px;
 }
