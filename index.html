@@ -10,26 +10,13 @@
 </head>
 
 <body class="page">
-  <div class="main-container">
-    <div class="container">
-      <p class="main-timer">
-        <span class="timer hours">00</span><span class="timer minutes">00</span>
-        <span class="timer seconds">00</span><span class="timer miliseconds">00</span>
-      </p>
-      <div class="button-container">
-        <button class="button start" type="button" value="start">Start</button>
-        <button class="button pause" type="button" value="pause" disabled>Pause</button>
-      </div>
-    </div>
-    <div class="container-interval"></div>
-  </div>
   <button class="button add" type="button">+</button>
   <template id="timer-template">
     <div class="main-container">
       <div class="container">
         <p class="main-timer">
-          <span class="timer hours">00</span><span class="timer minutes">00</span>
-          <span class="timer seconds">00</span><span class="timer miliseconds">00</span>
+          <span class="timer hours">00</span><span class="timer minutes">00</span><span
+            class="timer seconds">00</span><span class="timer centiseconds">00</span>
         </p>
         <div class="button-container">
           <button class="button start" type="button" value="start">Start</button>
@@ -38,7 +25,6 @@
       </div>
       <div class="container-interval"></div>
     </div>
-
   </template>
   <template id="interval-template">
     <div class="interval">
