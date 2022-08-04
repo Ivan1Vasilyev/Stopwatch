@@ -10,17 +10,22 @@
 </head>
 
 <body class="page">
-  <button class="button add" type="button">+</button>
-  <template id="timer-template">
-    <div class="main-container">
-      <div class="container">
-        <p class="main-timer">
-          <span class="timer hours">00</span><span class="timer minutes">00</span><span
-            class="timer seconds">00</span><span class="timer centiseconds">00</span>
+  <div class="left-side">
+    <button class="button add" type="button">+</button>
+  </div>
+  <div class="center"></div>
+  <div class="right-side"></div>
+
+  <template id="stopwatch-template">
+    <div class="container">
+      <div class="stopwatch">
+        <p class="stopwatch__timer">
+          <span class="stopwatch__digits" id="hours">00</span><span class="stopwatch__digits" id="minutes">00</span><span
+            class="stopwatch__digits" id="seconds">00</span><span class="stopwatch__digits" id="centiseconds">00</span>
         </p>
-        <div class="button-container">
-          <button class="button start" type="button" value="start">Start</button>
-          <button class="button pause" type="button" value="pause" disabled>Pause</button>
+        <div class="stopwatch__buttons">
+          <button class="button stopwatch__button-start" type="button" value="start">Start</button>
+          <button class="button stopwatch__button-pause stopwatch__button-pause_inactive" type="button" value="pause" disabled>Pause</button>
         </div>
       </div>
       <div class="container-interval"></div>

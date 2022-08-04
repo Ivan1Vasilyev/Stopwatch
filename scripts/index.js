@@ -2,15 +2,38 @@ function isZeroNeed(num) {
   return String(num).length == 1 ? '0' + num : num;
 }
 
-const intervalTemplate = document.getElementById('interval-template').content.querySelector('.interval'),
-  stopwatchTemplate = document.getElementById('timer-template').content.querySelector('.main-container'),
-  buttonAddTimer = document.querySelector('.add'),
+const selectors = {
+  buttonAddTimer: '.add',
+  buttonClearInterval: '.interval__button-clear',
+  buttonPause: '.stopwatch__button-pause',
+  buttonStart: '.stopwatch__button-start',
+  buttonIntervalClass: '.stopwatch__button-interval',
+  buttonPauseClass: '.stopwatch__button-pause',
+  buttonStartClass: '.stopwatch__button-start',
+  buttonStopClass: '.stopwatch__button-stop',
+  centiseconds: '#centiseconds',
+  hours: '#hours',
+  intervals: '.container-interval',
+  intervalTemplate: '.interval',
+  intervalTemplateId: 'interval-template',
+  minutes: '#minutes',
+  stopwatchContainer: '.center',
+  stopwatchTemplate: '.container',
+  stopwatchTemplateId: 'stopwatch-template',
+  seconds: '#seconds',
+  textInterval: '.interval__text'
+},
+  intervalTemplate = document.getElementById(selectors.intervalTemplateId).content.querySelector(selectors.intervalTemplate),
+  stopwatchTemplate = document.getElementById(selectors.stopwatchTemplateId).content.querySelector(selectors.stopwatchTemplate),
+  stopwatchContainer = document.querySelector(selectors.stopwatchContainer),
+  buttonAddTimer = document.querySelector(selectors.buttonAddTimer),
   buttonSettings = {
-    interval: ['interval', 'Interval'],
-    pause: ['pause', 'Pause'],
-    reset: ['reset', 'Reset'],
-    continue: ['continue', 'Continue'],
-    start: ['start', 'Start'],
+    interval: ['interval', 'Interval', 'stopwatch__button-interval'],
+    pause: ['pause', 'Pause', 'stopwatch__button-pause'],
+    reset: ['reset', 'Reset', 'stopwatch__button-stop'],
+    continue: ['continue', 'Continue', 'stopwatch__button-start'],
+    start: ['start', 'Start', 'stopwatch__button-start'],
+    default: ['pause', 'Pause', 'stopwatch__button-pause_inactive']
   };
 
 class Timer {
@@ -50,13 +73,13 @@ class Stopwatch {
   countIntervals = 1;
 
   createContent() {
-    this.buttonStart = this.container.querySelector('.start');
-    this.buttonPause = this.container.querySelector('.pause');
-    this.intervals = this.container.querySelector('.container-interval');
-    this.hours = new Timer(this.container.querySelector('.hours'), undefined, 99);
-    this.minutes = new Timer(this.container.querySelector('.minutes'), this.hours, 60);
-    this.seconds = new Timer(this.container.querySelector('.seconds'), this.minutes, 60);
-    this.centiseconds = new Timer(this.container.querySelector('.centiseconds'), this.seconds, 100, true);
+    this.buttonStart = this.container.querySelector(selectors.buttonStart);
+    this.buttonPause = this.container.querySelector(selectors.buttonPause);
+    this.intervals = this.container.querySelector(selectors.intervals);
+    this.hours = new Timer(this.container.querySelector(selectors.hours), undefined, 99);
+    this.minutes = new Timer(this.container.querySelector(selectors.minutes), this.hours, 60);
+    this.seconds = new Timer(this.container.querySelector(selectors.seconds), this.minutes, 60);
+    this.centiseconds = new Timer(this.container.querySelector(selectors.centiseconds), this.seconds, 100, true);
     this.allTimers = [this.hours, this.minutes, this.seconds, this.centiseconds];
     this.addButtonsListeners();
   }
@@ -68,8 +91,8 @@ class Stopwatch {
 
   createInterval() {
     const newInterval = intervalTemplate.cloneNode(true);
-    this.createTextInterval(newInterval.querySelector('.interval__text'));
-    newInterval.querySelector('.interval__button-clear').addEventListener('click', () => newInterval.remove());
+    this.createTextInterval(newInterval.querySelector(selectors.textInterval));
+    newInterval.querySelector(selectors.buttonClearInterval).addEventListener('click', () => newInterval.remove());
     return newInterval;
   }
 
@@ -80,8 +103,12 @@ class Stopwatch {
   setButtons(buttonStart, buttonPause, setStart, setPause) {
     buttonStart.value = setStart[0];
     buttonStart.textContent = setStart[1];
+    buttonStart.className = 'button'
+    buttonStart.classList.add(setStart[2])
     buttonPause.value = setPause[0];
     buttonPause.textContent = setPause[1];
+    buttonPause.className = 'button'
+    buttonPause.classList.add(setPause[2])
   }
 
   playTimer(buttonStart, buttonPause) {
@@ -111,7 +138,7 @@ class Stopwatch {
     this.resetTimers();
     this.clearIntervals();
     this.countIntervals = 1;
-    this.setButtons(buttonStart, buttonPause, buttonSettings.start, buttonSettings.pause);
+    this.setButtons(buttonStart, buttonPause, buttonSettings.start, buttonSettings.default);
     buttonPause.setAttribute('disabled', true);
   }
 
@@ -153,10 +180,10 @@ const createStopwatch = () => {
 };
 
 const addStopwatch = () => {
-  document.body.append(createStopwatch());
+  stopwatchContainer.append(createStopwatch());
 };
 
 buttonAddTimer.addEventListener('click', addStopwatch);
 
-document.body.prepend(createStopwatch());
+stopwatchContainer.prepend(createStopwatch());
 //================================================================================================

@@ -1,0 +1,5 @@
+.page {
+  background-image: url(../images/background.jpg);
+  display: grid;
+  grid-template-columns: 200px 1fr 200px;
+}

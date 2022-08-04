@@ -1,0 +1,6 @@
+.container-interval {
+  width: 350px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
