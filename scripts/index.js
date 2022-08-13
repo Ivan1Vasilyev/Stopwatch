@@ -3,10 +3,8 @@ const selectors = {
     buttonClearInterval: '.interval__button-clear',
     buttonPause: '.stopwatch__button-pause',
     buttonStart: '.stopwatch__button-start',
-    buttonIntervalClass: '.stopwatch__button-interval',
-    buttonPauseClass: '.stopwatch__button-pause',
-    buttonStartClass: '.stopwatch__button-start',
-    buttonStopClass: '.stopwatch__button-stop',
+    buttonInterval: '.stopwatch__button-interval',
+    buttonReset: '.stopwatch__button-reset',
     centiseconds: '#centiseconds',
     hours: '#hours',
     intervals: '.container-interval',
@@ -70,6 +68,8 @@ class Stopwatch {
   createContent() {
     this.buttonStart = this.container.querySelector(selectors.buttonStart);
     this.buttonPause = this.container.querySelector(selectors.buttonPause);
+    this.buttonInterval = this.container.querySelector(selectors.buttonInterval);
+    this.buttonReset = this.container.querySelector(selectors.buttonReset);
     this.intervals = this.container.querySelector(selectors.intervals);
     this.hours = new Timer(this.container.querySelector(selectors.hours), undefined, 99);
     this.minutes = new Timer(this.container.querySelector(selectors.minutes), this.hours, 60);
@@ -94,26 +94,6 @@ class Stopwatch {
     this.intervals.prepend(this.createInterval());
   }
 
-  setButtons(settingsStart, settingsPause) {
-    this.buttonStart.value = settingsStart[0];
-    this.buttonStart.textContent = settingsStart[1];
-    this.buttonStart.className = `button ${settingsStart[2]}`;
-    this.buttonPause.value = settingsPause[0];
-    this.buttonPause.textContent = settingsPause[1];
-    this.buttonPause.className = `button ${settingsPause[2]}`;
-  }
-
-  playTimer() {
-    this.timer = setInterval(this.centiseconds.update.bind(this.centiseconds), 10);
-    this.setButtons(buttonSettings.interval, buttonSettings.pause);
-    this.buttonPause.removeAttribute('disabled');
-  }
-
-  pauseTimer() {
-    clearInterval(this.timer);
-    this.setButtons(buttonSettings.reset, buttonSettings.continue);
-  }
-
   resetTimers() {
     this.allTimers.forEach(timer => {
       timer.reset();
@@ -125,40 +105,47 @@ class Stopwatch {
     this.intervals.innerHTML = '';
   }
 
+  setButtonEnable(...buttons) {
+    buttons.forEach(button => {
+      button.removeAttribute('disabled');
+      button.classList.remove('stopwatch__button-pause_inactive');
+    })
+  }
+
+  setButtonDisable(...buttons) {
+    buttons.forEach(button => {
+      button.setAttribute('disabled', true);
+      button.classList.add('stopwatch__button-pause_inactive');
+    })
+  }
+
   resetAll() {
     this.resetTimers();
     this.clearIntervals();
     this.countIntervals = 1;
-    this.setButtons(buttonSettings.start, buttonSettings.default);
-    this.buttonPause.setAttribute('disabled', true);
+    this.buttonStart.textContent = 'Старт'
+    this.setButtonDisable(this.buttonReset)
+    this.setButtonEnable(this.buttonStart)
   }
 
-  polymorphButtonStart(event) {
-    switch (event.currentTarget.value) {
-      case buttonSettings.interval[0]:
-        this.addInterval();
-        break;
-      case buttonSettings.start[0]:
-        this.playTimer();
-        break;
-      case buttonSettings.reset[0]:
-        this.resetAll();
-    }
+  playTimer() {
+    this.timer = setInterval(this.centiseconds.update.bind(this.centiseconds), 10);
+    this.setButtonDisable(this.buttonStart, this.buttonReset)
+    this.setButtonEnable(this.buttonPause, this.buttonInterval)
   }
 
-  polymorphButtonPause(event) {
-    switch (event.currentTarget.value) {
-      case buttonSettings.continue[0]:
-        this.playTimer();
-        break;
-      case buttonSettings.pause[0]:
-        this.pauseTimer();
-    }
+  pauseTimer() {
+    clearInterval(this.timer);
+    this.buttonStart.textContent = 'Продолжить'
+    this.setButtonDisable(this.buttonPause, this.buttonInterval)
+    this.setButtonEnable(this.buttonStart, this.buttonReset)
   }
 
   addButtonsListeners() {
-    this.buttonStart.addEventListener('click', event => this.polymorphButtonStart(event));
-    this.buttonPause.addEventListener('click', event => this.polymorphButtonPause(event));
+    this.buttonStart.addEventListener('click', () => this.playTimer());
+    this.buttonPause.addEventListener('click', () => this.pauseTimer());
+    this.buttonInterval.addEventListener('click', () => this.addInterval());
+    this.buttonReset.addEventListener('click', () => this.resetAll());
   }
 }
 

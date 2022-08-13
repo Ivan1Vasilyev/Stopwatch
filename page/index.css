@@ -11,6 +11,6 @@
 @import url(../blocks/interval__button-clear.css);
 @import url(../blocks/stopwatch__button-interval.css);
 @import url(../blocks/stopwatch__button-pause.css);
-@import url(../blocks/stopwatch__button-pause_inactive.css);
 @import url(../blocks/stopwatch__button-start.css);
-@import url(../blocks/stopwatch__button-stop.css);
+@import url(../blocks/stopwatch__button-reset.css);
+@import url(../blocks/stopwatch__button-pause_inactive.css);
