@@ -1,3 +1,12 @@
+const buttonSettings = {
+    interval: ['interval', 'Interval', 'stopwatch__button-interval'],
+    pause: ['pause', 'Pause', 'stopwatch__button-pause'],
+    reset: ['reset', 'Reset', 'stopwatch__button-stop'],
+    continue: ['continue', 'Continue', 'stopwatch__button-start'],
+    start: ['start', 'Start', 'stopwatch__button-start'],
+    default: ['pause', 'Pause', 'button_inactive'],
+  };
+
 class Timer {
   constructor(place, next, uppestValue) {
     this.place = place;

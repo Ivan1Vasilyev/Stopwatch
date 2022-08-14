@@ -6,6 +6,7 @@ const selectors = {
     buttonInterval: '.stopwatch__button-interval',
     buttonReset: '.stopwatch__button-reset',
     buttonCloseIcon: '.stopwatch__close-icon',
+    buttonInactiveClass: 'button_inactive',
     centiseconds: '#centiseconds',
     hours: '#hours',
     intervals: '.container-interval',
@@ -21,15 +22,7 @@ const selectors = {
   intervalTemplate = document.getElementById(selectors.intervalTemplateId).content.querySelector(selectors.intervalTemplate),
   stopwatchTemplate = document.getElementById(selectors.stopwatchTemplateId).content.querySelector(selectors.stopwatchTemplate),
   stopwatchContainer = document.querySelector(selectors.stopwatchContainer),
-  buttonAddStopwatch = document.querySelector(selectors.buttonAddStopwatch),
-  buttonSettings = {
-    interval: ['interval', 'Interval', 'stopwatch__button-interval'],
-    pause: ['pause', 'Pause', 'stopwatch__button-pause'],
-    reset: ['reset', 'Reset', 'stopwatch__button-stop'],
-    continue: ['continue', 'Continue', 'stopwatch__button-start'],
-    start: ['start', 'Start', 'stopwatch__button-start'],
-    default: ['pause', 'Pause', 'button_inactive'],
-  };
+  buttonAddStopwatch = document.querySelector(selectors.buttonAddStopwatch);
 
 class Timer {
   constructor(place, next, uppestValue) {
@@ -110,14 +103,14 @@ class Stopwatch {
   setButtonEnable(...buttons) {
     buttons.forEach(button => {
       button.removeAttribute('disabled');
-      button.classList.remove('button_inactive');
+      button.classList.remove(selectors.buttonInactiveClass);
     })
   }
 
   setButtonDisable(...buttons) {
     buttons.forEach(button => {
       button.setAttribute('disabled', true);
-      button.classList.add('button_inactive');
+      button.classList.add(selectors.buttonInactiveClass);
     })
   }
 
