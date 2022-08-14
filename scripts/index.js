@@ -138,6 +138,7 @@ class Stopwatch {
 
   closeStopwatch() {
     this.container.remove()
+    this.container = null
   }
 
   addButtonsListeners() {
