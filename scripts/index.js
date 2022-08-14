@@ -5,6 +5,7 @@ const selectors = {
     buttonStart: '.stopwatch__button-start',
     buttonInterval: '.stopwatch__button-interval',
     buttonReset: '.stopwatch__button-reset',
+    buttonCloseIcon: '.stopwatch__close-icon',
     centiseconds: '#centiseconds',
     hours: '#hours',
     intervals: '.container-interval',
@@ -27,7 +28,7 @@ const selectors = {
     reset: ['reset', 'Reset', 'stopwatch__button-stop'],
     continue: ['continue', 'Continue', 'stopwatch__button-start'],
     start: ['start', 'Start', 'stopwatch__button-start'],
-    default: ['pause', 'Pause', 'stopwatch__button-pause_inactive'],
+    default: ['pause', 'Pause', 'button_inactive'],
   };
 
 class Timer {
@@ -70,6 +71,7 @@ class Stopwatch {
     this.buttonPause = this.container.querySelector(selectors.buttonPause);
     this.buttonInterval = this.container.querySelector(selectors.buttonInterval);
     this.buttonReset = this.container.querySelector(selectors.buttonReset);
+    this.buttonCloseIcon = this.container.querySelector(selectors.buttonCloseIcon)
     this.intervals = this.container.querySelector(selectors.intervals);
     this.hours = new Timer(this.container.querySelector(selectors.hours), undefined, 99);
     this.minutes = new Timer(this.container.querySelector(selectors.minutes), this.hours, 60);
@@ -108,14 +110,14 @@ class Stopwatch {
   setButtonEnable(...buttons) {
     buttons.forEach(button => {
       button.removeAttribute('disabled');
-      button.classList.remove('stopwatch__button-pause_inactive');
+      button.classList.remove('button_inactive');
     })
   }
 
   setButtonDisable(...buttons) {
     buttons.forEach(button => {
       button.setAttribute('disabled', true);
-      button.classList.add('stopwatch__button-pause_inactive');
+      button.classList.add('button_inactive');
     })
   }
 
@@ -123,7 +125,7 @@ class Stopwatch {
     this.resetTimers();
     this.clearIntervals();
     this.countIntervals = 1;
-    this.buttonStart.textContent = 'Старт'
+    this.buttonStart.textContent = 'Start'
     this.setButtonDisable(this.buttonReset)
     this.setButtonEnable(this.buttonStart)
   }
@@ -136,9 +138,13 @@ class Stopwatch {
 
   pauseTimer() {
     clearInterval(this.timer);
-    this.buttonStart.textContent = 'Продолжить'
+    this.buttonStart.textContent = 'Continue'
     this.setButtonDisable(this.buttonPause, this.buttonInterval)
     this.setButtonEnable(this.buttonStart, this.buttonReset)
+  }
+
+  closeStopwatch() {
+    this.container.remove()
   }
 
   addButtonsListeners() {
@@ -146,6 +152,7 @@ class Stopwatch {
     this.buttonPause.addEventListener('click', () => this.pauseTimer());
     this.buttonInterval.addEventListener('click', () => this.addInterval());
     this.buttonReset.addEventListener('click', () => this.resetAll());
+    this.buttonCloseIcon.addEventListener('click', () => this.closeStopwatch())
   }
 }
 

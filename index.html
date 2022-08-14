@@ -19,15 +19,16 @@
   <template id="stopwatch-template">
     <div class="container">
       <div class="stopwatch">
+        <button class="stopwatch__close-icon">X</button>
         <p class="stopwatch__timer">
           <span class="stopwatch__digits" id="hours">00</span><span class="stopwatch__digits" id="minutes">00</span><span
             class="stopwatch__digits" id="seconds">00</span><span class="stopwatch__digits" id="centiseconds">00</span>
         </p>
         <div class="stopwatch__buttons">
           <button class="button stopwatch__button-start" type="button" value="start">Start</button>
-          <button class="button stopwatch__button-pause stopwatch__button-pause_inactive" type="button" value="pause" disabled>Pause</button>
-          <button class="button stopwatch__button-interval stopwatch__button-pause_inactive" type="button" value="interval" disabled>Interval</button>
-          <button class="button stopwatch__button-reset stopwatch__button-pause_inactive" type="button" value="reset" disabled>Reset</button>
+          <button class="button button_inactive stopwatch__button-pause" type="button" value="pause" disabled>Pause</button>
+          <button class="button button_inactive stopwatch__button-interval" type="button" value="interval" disabled>Interval</button>
+          <button class="button button_inactive stopwatch__button-reset" type="button" value="reset" disabled>Reset</button>
         </div>
       </div>
       <div class="container-interval"></div>

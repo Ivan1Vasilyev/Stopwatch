@@ -1,0 +1,7 @@
+.stopwatch__close-icon {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  position: absolute;
+  left: -35px
+}
