@@ -1,3 +1,7 @@
 .stopwatch__button-start {
-  background-color: green;
+  /* background-color: green; */
+  background-image: url(../images/start.gif);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position-x: center;
 }

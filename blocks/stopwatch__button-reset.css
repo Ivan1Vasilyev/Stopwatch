@@ -1,3 +1,7 @@
 .stopwatch__button-reset {
-  background-color: #d64747;
+  /* background-color: #d64747; */
+  background-image: url(../images/stop.gif);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position-x: center;
 }

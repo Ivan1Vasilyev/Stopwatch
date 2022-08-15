@@ -1,5 +1,5 @@
 .stopwatch__buttons {
   display: grid;
   grid-template: repeat(2, 1fr)/repeat(2, 1fr);
-  margin-left: 20px;
+  margin: 15px 0 0 20px;
 }
