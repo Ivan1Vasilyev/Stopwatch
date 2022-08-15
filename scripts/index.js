@@ -34,7 +34,7 @@ class Timer {
   current = 0;
 
   updateText() {
-    this.place.textContent = String(this.current).length == 1 ? '0' + this.current : this.current;
+    this.place.textContent = this.current < 10 ? '0' + this.current : this.current;
   }
 
   reset() {
