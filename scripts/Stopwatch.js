@@ -1,55 +1,33 @@
-const buttonSettings = {
+export default class Stopwatch {
+  static buttonSettings = {
     interval: ['interval', 'Interval', 'stopwatch__button-interval'],
     pause: ['pause', 'Pause', 'stopwatch__button-pause'],
-    reset: ['reset', 'Reset', 'stopwatch__button-stop'],
+    reset: ['reset', 'Reset', 'stopwatch__button-reset'],
     continue: ['continue', 'Continue', 'stopwatch__button-start'],
     start: ['start', 'Start', 'stopwatch__button-start'],
     default: ['pause', 'Pause', 'button_inactive'],
-  };
-
-class Timer {
-  constructor(place, next, uppestValue) {
-    this.place = place;
-    this.next = next;
-    this.uppestValue = uppestValue;
   }
-
-  current = 0;
-
-  updateText() {
-    this.place.textContent = String(this.current).length == 1 ? '0' + this.current : this.current;
-  }
-
-  reset() {
-    this.current = 0;
-  }
-
-  update() {
-    this.current++;
-    if (this.current === this.uppestValue) {
-      this.next?.update();
-      this.reset();
-    }
-    this.updateText();
-  }
-}
-
-class Stopwatch {
-  constructor(container) {
+  constructor(container, intervalTemplate, selectors, timersHandle) {
     this.container = container;
+    this.intervalTemplate = intervalTemplate
+    this.timersHandle = timersHandle
+    this.selectors = selectors
   }
 
   timer;
   countIntervals = 1;
 
   createContent() {
-    this.buttonStart = this.container.querySelector(selectors.buttonStart);
-    this.buttonPause = this.container.querySelector(selectors.buttonPause);
-    this.intervals = this.container.querySelector(selectors.intervals);
-    this.hours = new Timer(this.container.querySelector(selectors.hours), undefined, 99);
-    this.minutes = new Timer(this.container.querySelector(selectors.minutes), this.hours, 60);
-    this.seconds = new Timer(this.container.querySelector(selectors.seconds), this.minutes, 60);
-    this.centiseconds = new Timer(this.container.querySelector(selectors.centiseconds), this.seconds, 100);
+    this.buttonStart = this.container.querySelector(this.selectors.buttonStart);
+    this.buttonPause = this.container.querySelector(this.selectors.buttonPause);
+    this.buttonInterval = this.container.querySelector(this.selectors.buttonInterval);
+    this.buttonReset = this.container.querySelector(this.selectors.buttonReset);
+    this.buttonCloseIcon = this.container.querySelector(this.selectors.buttonCloseIcon);
+    this.intervals = this.container.querySelector(this.selectors.intervals);
+    this.hours = this.timersHandle(this.container.querySelector(this.selectors.hours), undefined, 99);
+    this.minutes = this.timersHandle(this.container.querySelector(this.selectors.minutes), this.hours, 60);
+    this.seconds = this.timersHandle(this.container.querySelector(this.selectors.seconds), this.minutes, 60);
+    this.centiseconds = this.timersHandle(this.container.querySelector(this.selectors.centiseconds), this.seconds, 100);
     this.allTimers = [this.hours, this.minutes, this.seconds, this.centiseconds];
     this.addButtonsListeners();
   }
@@ -59,9 +37,9 @@ class Stopwatch {
   }
 
   createInterval() {
-    const newInterval = intervalTemplate.cloneNode(true);
-    this.createTextInterval(newInterval.querySelector(selectors.textInterval));
-    newInterval.querySelector(selectors.buttonClearInterval).addEventListener('click', () => newInterval.remove());
+    const newInterval = this.intervalTemplate.cloneNode(true);
+    this.createTextInterval(newInterval.querySelector(this.selectors.textInterval));
+    newInterval.querySelector(this.selectors.buttonClearInterval).addEventListener('click', () => newInterval.remove());
     return newInterval;
   }
 
@@ -80,13 +58,13 @@ class Stopwatch {
 
   playTimer() {
     this.timer = setInterval(this.centiseconds.update.bind(this.centiseconds), 10);
-    this.setButtons(buttonSettings.interval, buttonSettings.pause);
+    this.setButtons(Stopwatch.buttonSettings.interval, Stopwatch.buttonSettings.pause);
     this.buttonPause.removeAttribute('disabled');
   }
 
   pauseTimer() {
     clearInterval(this.timer);
-    this.setButtons(buttonSettings.reset, buttonSettings.continue);
+    this.setButtons(Stopwatch.buttonSettings.reset, Stopwatch.buttonSettings.continue);
   }
 
   resetTimers() {
@@ -96,43 +74,45 @@ class Stopwatch {
     });
   }
 
-  clearIntervals() {
-    this.intervals.innerHTML = '';
-  }
-
   resetAll() {
     this.resetTimers();
-    this.clearIntervals();
+    this.intervals.innerHTML = '';
     this.countIntervals = 1;
-    this.setButtons(buttonSettings.start, buttonSettings.default);
+    this.setButtons(Stopwatch.buttonSettings.start, Stopwatch.buttonSettings.default);
     this.buttonPause.setAttribute('disabled', true);
   }
 
   polymorphButtonStart(event) {
     switch (event.currentTarget.value) {
-      case buttonSettings.interval[0]:
+      case Stopwatch.buttonSettings.interval[0]:
         this.addInterval();
         break;
-      case buttonSettings.start[0]:
+      case Stopwatch.buttonSettings.start[0]:
         this.playTimer();
         break;
-      case buttonSettings.reset[0]:
+      case Stopwatch.buttonSettings.reset[0]:
         this.resetAll();
     }
   }
 
   polymorphButtonPause(event) {
     switch (event.currentTarget.value) {
-      case buttonSettings.continue[0]:
+      case Stopwatch.buttonSettings.continue[0]:
         this.playTimer();
         break;
-      case buttonSettings.pause[0]:
+      case Stopwatch.buttonSettings.pause[0]:
         this.pauseTimer();
     }
+  }
+
+  closeStopwatch() {
+    this.container.remove()
+    this.container = null
   }
 
   addButtonsListeners() {
     this.buttonStart.addEventListener('click', event => this.polymorphButtonStart(event));
     this.buttonPause.addEventListener('click', event => this.polymorphButtonPause(event));
+    this.buttonCloseIcon.addEventListener('click', () => this.closeStopwatch());
   }
 }

@@ -1,6 +1,6 @@
 .stopwatch {
   display: flex;
-  align-items: flex-start;
+  justify-content: space-between;
   background-color: #3e3f38;
   position: relative;
   width: 515px;

@@ -25,10 +25,10 @@
             class="stopwatch__digits" id="seconds">00</span><span class="stopwatch__digits" id="centiseconds">00</span>
         </p>
         <div class="stopwatch__buttons">
-          <button class="button stopwatch__button-start" type="button" value="start"></button>
-          <button class="button button_inactive stopwatch__button-interval" type="button" value="interval" disabled>Interval</button>
+          <button class="button stopwatch__button-start" type="button" value="start">Start</button>
+          <!-- <button class="button button_inactive stopwatch__button-interval" type="button" value="interval" disabled>Interval</button> -->
           <button class="button button_inactive stopwatch__button-pause" type="button" value="pause" disabled>Pause</button>
-          <button class="button button_inactive stopwatch__button-reset" type="button" value="reset" disabled></button>
+          <!-- <button class="button button_inactive stopwatch__button-reset" type="button" value="reset" disabled>Reset</button> -->
         </div>
       </div>
       <div class="container-interval"></div>
@@ -40,7 +40,7 @@
       <button class="interval__button-clear" type="button">X</button>
     </div>
   </template>
-  <script src="./scripts/index.js"></script>
+  <script type="module" src="./scripts/index.js"></script>
 </body>
 
 </html>
