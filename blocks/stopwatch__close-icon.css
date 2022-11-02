@@ -1,9 +1,23 @@
 .stopwatch__close-icon {
-  width: 35px;
+  width: 85px;
   height: 35px;
-  border-radius: 50%;
   position: absolute;
-  left: -35px;
+  top: -1px;
+  left: -1px;
+  color: #f6d660;
+  border-radius: 20px 0 20px 0;
+  border: 1px solid rgba(168,151,122);
+  box-shadow: inset 7px 9px 20px 0px rgba(210,212,105,0.7);
+  background-color: #3e3f38;
+  cursor: pointer;
+  transition: .3s;
+}
+
+.stopwatch__close-icon:hover {
+  border-bottom-color: rgba(0, 255, 255, 0.7);
+  border-right-color: rgba(0, 255, 255, 0.7);
+  box-shadow: inset 7px 9px 20px 0px rgba(210,212,105,0.7),
+    inset -2px -2px 7px 0px rgba(0, 255, 255, 0.7),
+    2px 2px 7px 0px rgba(0, 255, 255, 0.7);
   color: red;
-  background-color: #314066;
 }
