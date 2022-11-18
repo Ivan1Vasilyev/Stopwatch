@@ -1,0 +1,11 @@
+.interval__number {
+  display: inline-block;
+  min-width: 20px;
+  font-size: 16px;
+  height: 17px;
+  color: #1920fb;
+  margin-right: 5px;
+  text-align: center;
+  background-position: center;
+  background-size: cover;
+}

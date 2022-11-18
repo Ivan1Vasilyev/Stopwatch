@@ -9,6 +9,7 @@
 @import url(../blocks/interval.css);
 @import url(../blocks/interval__text.css);
 @import url(../blocks/interval__button-clear.css);
+@import url(../blocks/interval__number.css);
 @import url(../blocks/stopwatch__button-interval.css);
 @import url(../blocks/stopwatch__button-pause.css);
 @import url(../blocks/stopwatch__button-start.css);
@@ -17,3 +18,7 @@
 @import url(../blocks/button_inactive.css);
 @import url(../blocks/stopwatch__link.css);
 
+
+* {
+  box-sizing: border-box
+}

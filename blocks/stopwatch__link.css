@@ -7,8 +7,7 @@
   color: #f6d660;
   border-radius: 0 20px 0 20px;
   border: 1px solid rgba(168,151,122);
-  box-shadow: inset 7px -9px 20px 0px rgba(210,212,105,0.7);
-  background-color: #3e3f38;
+  background-color: transparent;
   cursor: pointer;
   transition: .3s;
 }
@@ -16,8 +15,7 @@
 .stopwatch__link:hover {
   border-top-color: rgba(0, 255, 255, 0.7);
   border-right-color: rgba(0, 255, 255, 0.7);
-  box-shadow: inset 7px -9px 20px 0px rgba(210,212,105,0.7),
-    inset -2px 2px 7px 0px rgba(0, 255, 255, 0.7),
+  box-shadow: inset -2px 2px 7px 0px rgba(0, 255, 255, 0.7),
     2px -2px 7px 0px rgba(0, 255, 255, 0.7);
   color: rgba(0, 255, 255, .9);;
 }

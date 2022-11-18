@@ -1,5 +1,4 @@
 .interval {
   display: flex;
-  align-items: center;
-  background-color: #3e3f38;
+  font-size: 16px;
 }

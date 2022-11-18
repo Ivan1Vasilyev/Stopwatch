@@ -1,3 +1,13 @@
 .interval__button-clear {
-  margin-left: 5px;
+  margin-left: 13px;
+  width: 17px;
+  height: 17px;
+  cursor: pointer;
+  border: none;
+  padding: 0;
+  background-color: transparent;
+  background-image: url(../images/delete.png);
+  background-position: 0 3px;
+  background-size: 20px 13px;
+  background-repeat: no-repeat;
 }

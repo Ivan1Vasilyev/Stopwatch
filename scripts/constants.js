@@ -18,6 +18,7 @@ export const selectors = {
   stopwatchTemplateId: 'stopwatch-template',
   seconds: '#seconds',
   textInterval: '.interval__text',
+  numberInterval: '.interval__number'
 },
 intervalTemplate = document.getElementById(selectors.intervalTemplateId).content.querySelector(selectors.intervalTemplate),
 stopwatchTemplate = document.getElementById(selectors.stopwatchTemplateId).content.querySelector(selectors.stopwatchTemplate),

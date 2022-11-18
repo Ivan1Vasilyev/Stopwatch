@@ -38,7 +38,8 @@ export default class Stopwatch {
 
   createInterval() {
     const newInterval = this.intervalTemplate.cloneNode(true);
-    this.createTextInterval(newInterval.querySelector(this.selectors.textInterval));
+    newInterval.querySelector(this.selectors.numberInterval).textContent = `${this.countIntervals++})`;
+    newInterval.querySelector(this.selectors.textInterval).textContent = `${this.hours.place.textContent}:${this.minutes.place.textContent}:${this.seconds.place.textContent}:${this.centiseconds.place.textContent}`;
     newInterval.querySelector(this.selectors.buttonClearInterval).addEventListener('click', () => newInterval.remove());
     return newInterval;
   }
